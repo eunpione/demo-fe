@@ -1,15 +1,9 @@
-<template>
-  <div class="home">
-    <CommunityView msg="Mendix 개발 리뷰"/>
-  </div>
-</template>
-
 <script>
 // @ is an alias to /src
 import CommunityView from '@/components/CommunityView.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'BoardCreate',
   components: {
     CommunityView,
   },

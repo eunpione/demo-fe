@@ -8,31 +8,45 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/board',
-    name: 'BoardList',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "board-list" */ '../views/BoardList.vue')
+    path: '/signup',
+    name: 'signup',
+    component: () => import(/* webpackChunkName: "signup" */"../views/SignUpView.vue")
   },
   {
-    path: '/board/:id',
-    name: 'BoardDetail',
-    component: () => import(/* webpackChunkName: "board-detail" */ '../views/BoardDetail.vue')
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "login" */"../views/LoginView.vue")
+  },
+  {
+    path: '/board',
+    name: 'BoardList',
+    component: () => import(/* webpackChunkName: "board-list" */ '../components/BoardList.vue'),
+    children: [
+      {
+        path: 'detail',
+        name: 'BoardDetail',
+        component: () => import(/* webpackChunkName: "board-detail" */ '../components/BoardDetail.vue')
+      },
+      {
+        path: 'create',
+        name: 'BoardCreate',
+        component: () => import(/* webpackChunkName: "board-create" */ '../components/BoardCreate.vue')
+      },
+    ]
   },
   {
     path: '/user',
     name: 'UserList',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "user-list" */ '../views/UserList.vue')
+    component: () => import(/* webpackChunkName: "user-list" */ '../components/UserList.vue'),
+    children: [
+      {
+        path: 'detail',
+        name: 'UserDetail',
+        component: () => import(/* webpackChunkName: "user-detail" */ '../components/UserDetail.vue')
+      },
+    ]
   },
-  {
-    path: '/user/:id',
-    name: 'UserDetail',
-    component: () => import(/* webpackChunkName: "user-detail" */ '../views/UserDetail.vue')
-  }
+
 ]
 
 const router = createRouter({
