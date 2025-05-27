@@ -1,6 +1,6 @@
 <template>
   <div class="center">
-    <h1>Mendix 개발 리뷰 Community에 온 걸 환영해</h1>
+    <h1>{{msg}} 커뮤에 온 걸 환영해</h1>
     <b-col class="mb-3">
       <b-icon icon="bell" animation="throb" font-scale="4"></b-icon>
     </b-col>
