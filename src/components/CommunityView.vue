@@ -1,15 +1,18 @@
 <template>
   <div class="center">
+    <header-nav></header-nav>
     <h1>{{msg}} 커뮤에 온 걸 환영해</h1>
-    <b-col class="mb-3">
-      <b-icon icon="bell" animation="throb" font-scale="4"></b-icon>
-    </b-col>
+    <footer-part></footer-part>
   </div>
 </template>
 
 <script>
+import FooterPart from "./common/FooterPart.vue"
+import HeaderNav from "./common/HeaderNav.vue";
+
 export default {
   name: 'CommunityView',
+  components: {FooterPart, HeaderNav},
   props: {
     msg: String
   }

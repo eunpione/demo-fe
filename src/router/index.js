@@ -1,53 +1,67 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import MainIntroView from '../views/MainIntroView.vue'
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "mainIntro",
+    component: MainIntroView,
   },
   {
-    path: '/signup',
-    name: 'signup',
-    component: () => import(/* webpackChunkName: "signup" */"../views/SignUpView.vue")
+    path: "/signup",
+    name: "signup",
+    component: () =>
+      import(/* webpackChunkName: "signup" */ "../views/SignUpView.vue"),
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "login" */"../views/LoginView.vue")
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
   },
   {
-    path: '/board',
-    name: 'BoardList',
-    component: () => import(/* webpackChunkName: "board-list" */ '../components/BoardList.vue'),
+    path: "/board",
+    name: "BoardList",
+    component: () =>
+      import(
+        /* webpackChunkName: "board-list" */ "../components/BoardList.vue"
+      ),
     children: [
       {
-        path: 'detail',
-        name: 'BoardDetail',
-        component: () => import(/* webpackChunkName: "board-detail" */ '../components/BoardDetail.vue')
+        path: "detail",
+        name: "BoardDetail",
+        component: () =>
+          import(
+            /* webpackChunkName: "board-detail" */ "../components/BoardDetail.vue"
+          ),
       },
       {
-        path: 'create',
-        name: 'BoardCreate',
-        component: () => import(/* webpackChunkName: "board-create" */ '../components/BoardCreate.vue')
+        path: "create",
+        name: "BoardCreate",
+        component: () =>
+          import(
+            /* webpackChunkName: "board-create" */ "../components/BoardCreate.vue"
+          ),
       },
-    ]
+    ],
   },
   {
-    path: '/user',
-    name: 'UserList',
-    component: () => import(/* webpackChunkName: "user-list" */ '../components/UserList.vue'),
+    path: "/user",
+    name: "UserList",
+    component: () =>
+      import(/* webpackChunkName: "user-list" */ "../components/UserList.vue"),
     children: [
       {
-        path: 'detail',
-        name: 'UserDetail',
-        component: () => import(/* webpackChunkName: "user-detail" */ '../components/UserDetail.vue')
+        path: "detail",
+        name: "UserDetail",
+        component: () =>
+          import(
+            /* webpackChunkName: "user-detail" */ "../components/UserDetail.vue"
+          ),
       },
-    ]
+    ],
   },
-
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

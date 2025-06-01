@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="MainIntro">
     <CommunityView msg="Mendix 개발 리뷰"/>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import CommunityView from '@/components/CommunityView.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'MainIntroView',
   components: {
     CommunityView,
   },
