@@ -20,6 +20,12 @@ const routes = [
       import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
   },
   {
+    path: "/logout",
+    name: "logout",
+    component: () =>
+      import(/* webpackChunkName: "logout" */ "../views/LogoutView.vue"),
+  },
+  {
     path: "/board",
     name: "BoardList",
     component: () =>
@@ -50,16 +56,12 @@ const routes = [
     name: "UserList",
     component: () =>
       import(/* webpackChunkName: "user-list" */ "../components/UserList.vue"),
-    children: [
-      {
-        path: "detail",
-        name: "UserDetail",
-        component: () =>
-          import(
-            /* webpackChunkName: "user-detail" */ "../components/UserDetail.vue"
-          ),
-      },
-    ],
+  },
+  {
+    path: "/userDetail",
+    name: "UserDetail",
+    component: () =>
+      import(/* webpackChunkName: "user-detail" */ "../components/UserDetail.vue"),
   },
 ];
 

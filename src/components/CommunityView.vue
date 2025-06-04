@@ -1,18 +1,13 @@
 <template>
-  <div class="center">
-    <header-nav></header-nav>
-    <h1>{{msg}} 커뮤에 온 걸 환영해</h1>
-    <footer-part></footer-part>
+  <div class="center">    
+    <h1>{{msg}} 커뮤</h1>   
   </div>
 </template>
 
 <script>
-import FooterPart from "./common/FooterPart.vue"
-import HeaderNav from "./common/HeaderNav.vue";
-
 export default {
   name: 'CommunityView',
-  components: {FooterPart, HeaderNav},
+  components: {},
   props: {
     msg: String
   }
