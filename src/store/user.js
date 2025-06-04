@@ -30,8 +30,8 @@ export const useUserStore = defineStore('user',{
             }
         },
         resetSignupState(){
-            this.signupError = null,
-            this.signupSuccess = false
+            this.signupError = null;
+            this.signupSuccess = false;
         }
     }
 })
