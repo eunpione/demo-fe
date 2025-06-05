@@ -1,3 +1,7 @@
+<script setup>
+/* eslint-disable */
+
+</script>
 
 <template>
   <div class="footer">
@@ -8,13 +12,6 @@
     <hr />
   </div>
 </template>
-
-<script>
-export default {
-  name: "FooterPart",
-  components: {},
-};
-</script>
 
 <style scoped>
 .footer {

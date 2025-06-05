@@ -41,15 +41,15 @@ const routes = [
             /* webpackChunkName: "board-detail" */ "../components/BoardDetail.vue"
           ),
       },
-      {
-        path: "create",
-        name: "BoardCreate",
-        component: () =>
-          import(
-            /* webpackChunkName: "board-create" */ "../components/BoardCreate.vue"
-          ),
-      },
     ],
+  },
+  {
+    path: "/board-create",
+    name: "BoardCreate",
+    component: () =>
+      import(
+            /* webpackChunkName: "board-create" */ "../components/BoardCreate.vue"
+      ),
   },
   {
     path: "/user",

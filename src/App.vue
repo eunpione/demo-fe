@@ -1,3 +1,9 @@
+<script setup>
+import "@/assets/styles/main.css";
+import FooterPart from "./components/common/FooterPart.vue";
+import HeaderNav from "./components/common/HeaderNav.vue";
+</script>
+
 <template>
   <header-nav />
   <router-view />
@@ -6,8 +12,3 @@
 </template>
 
 
-<script setup>
-import "@/assets/styles/main.css";
-import FooterPart from "./components/common/FooterPart.vue";
-import HeaderNav from "./components/common/HeaderNav.vue";
-</script>

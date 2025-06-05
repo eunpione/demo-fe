@@ -1,3 +1,9 @@
+<script setup>
+/* eslint-disable */
+// @ is an alias to /src
+import CommunityView from "@/components/CommunityView.vue";
+
+</script>
 
 <template>
   <div>
@@ -5,14 +11,3 @@
   </div>
   <community-view></community-view>
 </template>
-<script>
-// @ is an alias to /src
-import CommunityView from "@/components/CommunityView.vue";
-
-export default {
-  name: "LogoutView",
-  components: {
-    CommunityView,
-  },
-};
-</script>

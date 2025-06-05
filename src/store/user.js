@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { defineStore } from 'pinia';
 import APIURL from '@/api/axios';
+import router from '@/router/index';
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -30,6 +31,7 @@ export const useUserStore = defineStore('user', {
                 })
                 this.signupSuccess = true
                 this.signupError = null
+                router.push('/')
             } catch (error) {
                 this.signupError = error.response?.data?.message || '회원가입에 실패했습니다.'
                 this.signupSuccess = false

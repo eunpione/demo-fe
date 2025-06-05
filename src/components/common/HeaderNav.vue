@@ -1,3 +1,8 @@
+<script setup>
+/* eslint-disable */
+
+</script>
+
 <template>
   <header>
     <nav>
@@ -38,9 +43,3 @@
   </header>
 </template>
 
-<script>
-export default {
-  name: "HeaderNav",
-  components: {},
-};
-</script>

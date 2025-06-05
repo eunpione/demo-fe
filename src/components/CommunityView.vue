@@ -1,33 +1,13 @@
-<template>
-  <div class="center">    
-    <h1>{{msg}} 커뮤</h1>   
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'CommunityView',
-  components: {},
-  props: {
-    msg: String
-  }
-}
+<script setup>
+/* eslint-disable */
+const props = defineProps({
+  msg: String,
+});
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+
+<template>
+  <div class="center">
+    <h1>{{ props.msg }} 커뮤니티</h1>
+  </div>
+</template>
