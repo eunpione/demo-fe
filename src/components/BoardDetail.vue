@@ -8,7 +8,7 @@ import CommunityView from "@/components/CommunityView.vue";
 
 <template>
   <div>
-    <d>게시글 상세 컴포넌트</d>
+    <p>게시글 상세 컴포넌트</p>
   </div>
   <community-view></community-view>
 </template>

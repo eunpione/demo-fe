@@ -13,7 +13,7 @@ function submitSignup(){
 
 <template>
   <div>
-    <d>회원가입 컴포넌트</d>
+    <p>회원가입 컴포넌트</p>
     <form @submit.prevent="submitSignup">
       <input v-model="userStore.username" placeholder="아이디" />
       <input

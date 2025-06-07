@@ -10,6 +10,6 @@
     <button>글쓰기</button>
   </router-link>
   <div>
-    <d>게시글 목록 컴포넌트</d>
+    <p>게시글 목록 컴포넌트</p>
   </div>
 </template>

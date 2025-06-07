@@ -7,7 +7,7 @@ import CommunityView from "@/components/CommunityView.vue";
 
 <template>
   <div>
-    <d>로그아웃 컴포넌트</d>
+    <p>로그아웃 컴포넌트</p>
   </div>
   <community-view></community-view>
 </template>

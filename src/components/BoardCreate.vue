@@ -7,7 +7,7 @@ import WriteForm from "./include/WriteForm.vue";
 
 <template>
   <div>
-    <d>게시글 작성 컴포넌트</d>
+    <p>게시글 작성 컴포넌트</p>
     <write-form></write-form>
   </div>
 </template>

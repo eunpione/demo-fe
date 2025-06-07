@@ -7,7 +7,7 @@ import CommunityView from "@/components/CommunityView.vue";
 
 <template>
   <div>
-    <d>사용자 목록 컴포넌트</d>
+    <p>사용자 목록 컴포넌트</p>
   </div>
   <community-view></community-view>
 </template>

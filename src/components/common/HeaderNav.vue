@@ -9,32 +9,32 @@
       <hr />
       <div>
         <router-link :to="{ name: 'mainIntro' }">
-          <d>메인으로 </d>
+          <p>메인으로 </p>
         </router-link>
         <div>
           <router-link :to="{ name: 'BoardList' }">
-            <d>게시판 </d>
+            <p>게시판 </p>
           </router-link>
         </div>
 
         <div>
           <router-link :to="{ name: 'signup' }">
-            <d>회원가입 </d>
+            <p>회원가입 </p>
           </router-link>
           <router-link :to="{ name: 'login' }">
-            <d>로그인 </d>
+            <p>로그인 </p>
           </router-link>
           <router-link :to="{ name: 'UserDetail' }">
-            <d>마이페이지 </d>
+            <p>마이페이지 </p>
           </router-link>
           <router-link :to="{ name: 'logout' }">
-            <d>로그아웃 </d>
+            <p>로그아웃 </p>
           </router-link>
         </div>
 
         <div>
           <router-link :to="{ name: 'UserList' }">
-            <d>관리자 </d>
+            <p>관리자 </p>
           </router-link>
         </div>
       </div>
