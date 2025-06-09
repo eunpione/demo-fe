@@ -1,7 +1,16 @@
 <script setup>
+/* eslint-disable */
 import "@/assets/styles/main.css";
+import { onMounted } from "vue";
 import FooterPart from "./components/common/FooterPart.vue";
 import HeaderNav from "./components/common/HeaderNav.vue";
+import { useUserStore } from "./store/user";
+
+const userStore = useUserStore();
+
+onMounted(()=>{
+  userStore.initUser();
+})
 </script>
 
 <template>
