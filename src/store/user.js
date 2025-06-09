@@ -22,7 +22,7 @@ export const useUserStore = defineStore("user", {
   actions: {
     // 브라우저 새로고침 시에도 로그인된 사용자 정보 담도록
     initUser() {
-      const loginedUser = getUser(); 
+      const loginedUser = getUser();
       if (loginedUser && loginedUser.username) {
         this.username = loginedUser.username;
         this.role = loginedUser.role;
@@ -57,7 +57,7 @@ export const useUserStore = defineStore("user", {
         this.signupSuccess = false;
       }
     },
-    
+
     resetSignupState() {
       this.signupError = null;
       this.signupSuccess = false;
@@ -88,7 +88,7 @@ export const useUserStore = defineStore("user", {
         this.logined = true;
         this.role = userData.role;
 
-        const loginedUser ={
+        const loginedUser = {
           username: this.username,
           role: userData.role,
         }
@@ -113,16 +113,20 @@ export const useUserStore = defineStore("user", {
       try {
         console.log("로그아웃 시도: ", getUser());
         removeUser();
-        this.logined = false;  
+        this.logined = false;
         this.role = null;
         this.logoutError = null;
         this.logoutSuccess = true;
-        this.resetLoginState() 
+        this.resetLoginState()
         router.push("/logout");
       } catch (error) {
         this.logoutError = error.response?.data?.message || "로그아웃 중 오류가 발생했습니다."
         this.logoutSuccess = false;
       }
+    },
+
+    async getUserByUsername(){
+      
     }
   },
 });
