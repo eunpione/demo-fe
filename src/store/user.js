@@ -43,7 +43,7 @@ export const useUserStore = defineStore("user", {
 
         console.log("회원가입 요청:", userRequestDto);
         //Post Method api/user endpoint로 회원가입 요청
-        const response = await APIURL.post("api/user", userRequestDto, {
+        const response = await APIURL.post(`api/user`, userRequestDto, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -74,7 +74,7 @@ export const useUserStore = defineStore("user", {
         console.log("로그인 요청:", loginRequestDto);
 
         //Post method / login endpoint 로 로그인 요청
-        const response = await APIURL.post("login", loginRequestDto, {
+        const response = await APIURL.post(`login`, loginRequestDto, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -125,8 +125,16 @@ export const useUserStore = defineStore("user", {
       }
     },
 
-    async getUserByUsername(){
-      
+    async getUserByUsername(username){
+      //Get method / 현재 로그인된 사용자 정보 요청
+      const response = await APIURL.get(`api/user/name/${username}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const currentUser = response.data;
+      console.log("현재 로그인한 사용자: ", currentUser);
+      return currentUser;
     }
   },
 });
