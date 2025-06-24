@@ -54,30 +54,49 @@ export const useBoardStore = defineStore("board", {
       }
     },
 
-    async getAllBoard(){
+    async getAllBoard() {
+      try {
+        console.log("게시글 전체조회 호출");
 
-      try{
+        const response = await APIURL.get(`api/boards`);
+        const boardDtoList = response.data;
 
-          console.log("게시글 전체조회 호출");
+        boardDtoList.forEach((board) => {
+          console.log("게시글 제목: ", board.title);
+        });
 
-          const response = await APIURL.get(`api/boards`);
-          const boardList = response.data;
+        this.retrieveSuccess = true;
+        this.retrieveError = null;
 
-          boardList.forEach(board =>{
-            console.log("게시글 제목: ", board.title);
-          })
-
-          this.retrieveSuccess = true;
-          this.retrieveError = null;
-
-          return boardList;
-
-      }catch(error){
-          this.retrieveSuccess = false;
-          this.retrieveError = error.message || "게시판 조회 중 오류가 발생했습니다.";
-          console.error("게시글 조회 실패:", error);
-          return [];
+        return boardDtoList;
+      } catch (error) {
+        this.retrieveSuccess = false;
+        this.retrieveError =
+          error.message || "게시판 조회 중 오류가 발생했습니다.";
+        console.error("게시글 조회 실패:", error);
+        return [];
       }
-    }
+    },
+
+    async getBoard(boardId) {
+      try {
+        console.log("게시글 조회", boardId);
+
+        const response = await APIURL.get(`api/board/${boardId}`);
+        const boardDto = response.data;
+        
+        this.retrieveSuccess = true;
+        this.retrieveError = null;
+
+        return boardDto;
+
+      } catch (error) {
+        this.retrieveSuccess = false;
+        this.retrieveError =
+          error.message || "게시굴 조회 중 오류가 발생했습니다.";
+        console.error("게시글 조회 실패:", error);
+        return [];
+      }
+    },
   },
 });

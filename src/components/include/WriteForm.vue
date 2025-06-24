@@ -18,7 +18,7 @@ function saveBoard(){
     <form @submit.prevent="saveBoard">
     <div class="mb-3">
       <label for="FormControlTitle" class="form-label"
-        >BoardTitle</label
+        >게시글 제목</label
       >
       <input
         type="text"
@@ -30,7 +30,7 @@ function saveBoard(){
     </div>
     <div class="mb-3">
       <label for="Content" class="form-label"
-        >Board Content</label
+        >게시글 본문</label
       >
       <textarea
         class="form-control"

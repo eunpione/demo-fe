@@ -38,7 +38,7 @@ onMounted(() => {
         <tr v-for="board in boardList" :key="board.id">
           <th scope="row">{{ board.id }}</th>
           <td>
-            <router-link :to="{ name: 'BoardDetail' }">{{
+            <router-link :to="{ name: 'BoardDetail', params: {id: board.id} }">{{
               board.title
             }}</router-link>
           </td>
@@ -52,4 +52,7 @@ onMounted(() => {
       </tbody>
     </table>
   </div>
+
+  <router-view></router-view> 
+  <!--뷰 라우터는 부모 라우트 컴포넌트 내부에 라우터 뷰가 존재해야만 자식 라우트 컴포넌트를 이 위치에 렌더링-->
 </template>

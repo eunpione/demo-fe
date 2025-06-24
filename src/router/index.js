@@ -34,12 +34,13 @@ const routes = [
       ),
     children: [
       {
-        path: "detail",
+        path: "detail/:id",
         name: "BoardDetail",
         component: () =>
           import(
             /* webpackChunkName: "board-detail" */ "../components/BoardDetail.vue"
           ),
+          props: true,
       },
     ],
   },
