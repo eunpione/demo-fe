@@ -12,8 +12,11 @@ export const useBoardStore = defineStore("board", {
     createdDate: "",
     changedDate: "",
     author: null,
+    authorName: "",
     saveError: null,
     saveSuccess: false,
+    retrieveError: null,
+    retrieveSuccess: null,
   }),
 
   actions: {
@@ -50,5 +53,31 @@ export const useBoardStore = defineStore("board", {
         console.error("게시글 작성 실패:", error);
       }
     },
+
+    async getAllBoard(){
+
+      try{
+
+          console.log("게시글 전체조회 호출");
+
+          const response = await APIURL.get(`api/boards`);
+          const boardList = response.data;
+
+          boardList.forEach(board =>{
+            console.log("게시글 제목: ", board.title);
+          })
+
+          this.retrieveSuccess = true;
+          this.retrieveError = null;
+
+          return boardList;
+
+      }catch(error){
+          this.retrieveSuccess = false;
+          this.retrieveError = error.message || "게시판 조회 중 오류가 발생했습니다.";
+          console.error("게시글 조회 실패:", error);
+          return [];
+      }
+    }
   },
 });
