@@ -7,7 +7,7 @@
   <div class="footer">
     <hr />
     <span style="font-size: 0.8em; text-align: left">
-      MENDIX ERROR LOG copyright.WJ NEXT-G
+      MENDIX ERROR LOG copyright.WJ LCNC
     </span>
     <hr />
   </div>

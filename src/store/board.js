@@ -93,10 +93,27 @@ export const useBoardStore = defineStore("board", {
       } catch (error) {
         this.retrieveSuccess = false;
         this.retrieveError =
-          error.message || "게시굴 조회 중 오류가 발생했습니다.";
+          error.message || "게시글 조회 중 오류가 발생했습니다.";
         console.error("게시글 조회 실패:", error);
         return [];
       }
     },
+
+    async deleteBoard(boardId){
+
+      try{
+        console.log("게시글 삭제 id: ", boardId)
+
+        const response = await APIURL.delete(`api/board/${boardId}`);
+        const result = response.data;
+
+        return result;
+      }catch(error){
+        console.error("게시글 삭제 실패:", error);
+      }
+      
+
+
+    }
   },
 });
