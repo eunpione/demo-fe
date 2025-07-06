@@ -14,7 +14,7 @@ import CommunityView from '@/components/CommunityView.vue'
 
 <template>
   <div>
-    <CommunityView msg="Mendix 개발"/>
+    <CommunityView msg="Mendix 에러로그"/>
   </div>
 </template>
 

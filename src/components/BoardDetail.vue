@@ -1,85 +1,58 @@
 <script setup>
 /* eslint-disable */
 // @ is an alias to /src
-import { onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRoute } from 'vue-router';
 import { useBoardStore } from "@/store/board";
 
+
+const route = useRoute();
 const boardStore = useBoardStore();
 const boardDto = ref(null);
-const isEditing = ref(false);
 
-const props = defineProps({
-  id: {
-    type: Number,
-    required: true,
-  },
+async function fetchBoardDetail(boardId) {
+  const response = await boardStore.getBoard(boardId)
+  boardDto.value = response
+}
+
+onMounted(()=>{ //최초 진입 시 1회만 실행
+  fetchBoardDetail(route.params.id)
 });
 
-async function getBoard() {
-  const boardId = props.id;
+watch(() => route.params.id, (newId) => { //파라미터 바뀔 때 반응하여 dome 다시 그림
+  fetchBoardDetail(newId)
+})
 
-  if(!boardId){
-    console.error("게시글 ID가 없습니다.");
-    return;
-  }
-
-  const response = await boardStore.getBoard(boardId);
-  boardDto.value = response;
-  console.log("게시글 조회", response);
-}
-
-// '수정' 버튼 클릭 시 호출될 함수
-function startEditing() {
-  isEditing.value = true;
-}
-
-// '저장' 버튼 클릭 시 호출될 함수
-async function saveChanges() {
-  const boardId = props.id;
-  try {
-    
-    isEditing.value = false;
-  } catch (error) {
-    console.error("게시글 수정 실패:", error);
-
-  }
-}
-
-
-onMounted(() => {
-  console.log("boardId: ", props.id);
-  getBoard
-});
 </script>
+
 
 <template>
   <hr />
-  <div>
-    <p>게시글 상세 컴포넌트</p>
-  </div>
+  <div class="container mt-4">
 
-  <div>
-    <form>
-      <div class="mb-3">
-        <label for="FormControlTitle" class="form-label">게시글 제목</label>
-        <input
-          type="text"
-          class="form-control"
-          id="Title"
-          placeholder="게시글 제목을 작성해주세요."
-          v-model="boardStore.Title"
-        />
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">📄 게시글 상세</h2>
+      <hr />
+    </div>
+
+    <div v-if="boardDto" class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">{{ boardDto.title }}</h3>
+        <h6 class="card-subtitle mb-2 text-muted text-end">
+          작성자: {{ boardDto.authorUsername }}
+        </h6>
+
+        <p class="card-text mt-3">{{ boardDto.content }}</p>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <span class="badge bg-secondary me-2">작성일: {{ boardDto.createdDate?.slice(0, 10) }}</span>
+          <span class="badge bg-info text-dark">수정일: {{ boardDto.changedDate?.slice(0, 10) }}</span>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="Content" class="form-label">게시글 본문</label>
-        <textarea
-          class="form-control"
-          id="Content"
-          placeholder="게시글을 작성해주세요."
-          rows="5"
-          v-model="boardStore.Content"
-        ></textarea>
-      </div>
-    </form>
+    </div>
+
+    <div v-else class="alert alert-info text-center mt-5">
+      게시글을 불러오는 중입니다...
+    </div>
   </div>
 </template>

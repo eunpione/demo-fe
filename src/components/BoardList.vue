@@ -20,9 +20,11 @@ onMounted(() => {
 </script>
 
 <template>
+  <div class="d-flex justify-content-end mb-3">
   <router-link :to="{ name: 'BoardCreate' }">
-    <button>글쓰기</button>
+    <button class="btn btn-primary">게시글 작성</button>
   </router-link>
+</div>
 
   <div>
     <table class="table table-striped table-hover">
@@ -38,9 +40,9 @@ onMounted(() => {
         <tr v-for="board in boardList" :key="board.id">
           <th scope="row">{{ board.id }}</th>
           <td>
-            <router-link :to="{ name: 'BoardDetail', params: {id: board.id} }">{{
-              board.title
-            }}</router-link>
+            <router-link :to="{ name: 'BoardDetail', params: { id: board.id } }"
+              >{{ board.title }}
+            </router-link>
           </td>
           <td>{{ board.authorUsername }}</td>
           <td>
@@ -53,6 +55,6 @@ onMounted(() => {
     </table>
   </div>
 
-  <router-view></router-view> 
+  <router-view></router-view>
   <!--뷰 라우터는 부모 라우트 컴포넌트 내부에 라우터 뷰가 존재해야만 자식 라우트 컴포넌트를 이 위치에 렌더링-->
 </template>
