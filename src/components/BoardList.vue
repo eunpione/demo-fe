@@ -29,25 +29,27 @@ watch(
 </script>
 
 <template>
-  <div class="d-flex justify-content-end mb-3">
-    <router-link :to="{ name: 'BoardCreate' }">
-      <button class="btn btn-primary">게시글 작성</button>
-    </router-link>
+  <div class="container my-4">
+    <div class="d-flex justify-content-end mb-3">
+      <router-link :to="{ name: 'BoardCreate' }">
+        <button class="btn btn-primary">게시글 작성</button>
+      </router-link>
+    </div>
   </div>
 
   <div class="container my-4">
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th scope="col">ID</th>
+          <th scope="col">순번</th>
           <th scope="col">게시글 제목</th>
           <th scope="col">작성자</th>
           <th scope="col">게시글 작성/수정일</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="board in boardList" :key="board.id">
-          <th scope="row">{{ board.id }}</th>
+        <tr v-for="(board, idx) in boardList" :key="board.id">
+          <th scope="row">{{ idx + 1 }}</th>
           <td>
             <router-link :to="{ name: 'BoardDetail', params: { id: board.id } }"
               >{{ board.title }}
