@@ -13,7 +13,7 @@ function saveBoard() {
 </script>
 
 <template>
-  <div>
+  <div class="container my-4">
     <form @submit.prevent="saveBoard">
       <div class="mb-3">
         <label for="FormControlTitle" class="form-label"

@@ -21,9 +21,9 @@ onMounted(() => {
 });
 
 watch(
-  () => route.params.id,
+  () => route.params.id, // id가 변경되는 것 감지
   (newId) => {
-    //파라미터 바뀔 때 반응하여 dome 다시 그림
+    //파라미터 바뀔 때 반응하여 dom 다시 그림
     fetchBoardDetail(newId);
   }
 );
@@ -63,7 +63,7 @@ async function deleteBoard(boardId) {
           작성자: {{ boardDto.authorUsername }}
         </h6>
 
-        <p class="card-text mt-3">{{ boardDto.content }}</p>
+        <p class="card-text mt-3 text-start" style="white-space: pre-line;">{{ boardDto.content }}</p>
 
         <div class="mt-4 d-flex justify-content-end gap-2">
           <span class="badge bg-secondary me-2"

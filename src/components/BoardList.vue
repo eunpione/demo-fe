@@ -1,11 +1,13 @@
 <script setup>
 /* eslint-disable */
 // @ is an alias to /src
-import { onMounted, ref } from "vue";
+import { onMounted, watch, ref } from "vue";
+import { useRoute } from "vue-router";
 import { useBoardStore } from "@/store/board";
 
 const boardStore = useBoardStore();
 const boardList = ref([]);
+const route = useRoute();
 
 async function getAllBoard() {
   const response = await boardStore.getAllBoard();
@@ -17,16 +19,23 @@ onMounted(() => {
   console.log("컴포넌트가 화면에 표시되었음");
   getAllBoard(); // 컴포넌트 마운트 시 조회
 });
+
+watch(
+  () => route.fullPath, //fullpath가 변경되는 것 감지
+  () => {
+    getAllBoard();
+  }
+);
 </script>
 
 <template>
   <div class="d-flex justify-content-end mb-3">
-  <router-link :to="{ name: 'BoardCreate' }">
-    <button class="btn btn-primary">게시글 작성</button>
-  </router-link>
-</div>
+    <router-link :to="{ name: 'BoardCreate' }">
+      <button class="btn btn-primary">게시글 작성</button>
+    </router-link>
+  </div>
 
-  <div>
+  <div class="container my-4">
     <table class="table table-striped table-hover">
       <thead>
         <tr>

@@ -46,6 +46,8 @@ export const useBoardStore = defineStore("board", {
 
         this.saveSuccess = true;
         this.saveError = null;
+        this.Title = null;
+        this.Content = null;
         router.push("/board"); //게시글 목록으로 이동
       } catch (error) {
         this.saveSuccess = false;
