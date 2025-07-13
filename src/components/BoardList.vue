@@ -8,12 +8,15 @@ import { getUser } from "../../storage";
 
 const boardStore = useBoardStore();
 const boardList = ref([]);
+const filteredBoardList = ref([]);
+const searchKeyword = ref("");
 const route = useRoute();
 
 async function getAllBoard() {
   const response = await boardStore.getAllBoard();
   boardList.value = response;
   console.log("게시글 전체 조회", response);
+  filterBoardList();  
 }
 
 onMounted(() => {
@@ -28,12 +31,31 @@ watch(
   }
 );
 
-const loginUserName = getUser().username;
+function filterBoardList() {
+  const keyword = searchKeyword.value.trim().toLowerCase();
+
+  if (keyword === "") {
+    filteredBoardList.value = boardList.value;
+  } else {
+    filteredBoardList.value = boardList.value.filter((board) =>
+      board.title.toLowerCase().includes(keyword)
+    );
+  }
+}
+const loginUser = getUser();
+const loginUserName = loginUser ? loginUser.username : null;
 </script>
 
 <template>
   <div class="container my-4">
     <div class="d-flex justify-content-end mb-3">
+      <input
+        v-model="searchKeyword"
+        @input="filterBoardList"
+        type="text"
+        class="form-control w-50 me-2"
+        placeholder="게시글 제목을 검색하세요"
+        />
       <router-link :to="{ name: 'BoardCreate' }">
         <button class="btn btn-primary">게시글 작성</button>
       </router-link>
@@ -52,7 +74,7 @@ const loginUserName = getUser().username;
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(board, idx) in boardList" :key="board.id">
+        <tr v-for="(board, idx) in filteredBoardList" :key="board.id">
           <th scope="row">{{ idx + 1 }}</th>
           <td>
             <router-link :to="{ name: 'BoardDetail', params: { id: board.id } }"
@@ -70,10 +92,16 @@ const loginUserName = getUser().username;
               class="btn btn-info btn-sm"
               v-if="loginUserName === board.authorUsername"
             >
-              <router-link :to="{ name: 'BoardUpdate', params: { id: board.id }, state:{board} }"
+              <router-link
+                :to="{
+                  name: 'BoardUpdate',
+                  params: { id: board.id },
+                  state: { board },
+                }"
                 >수정
               </router-link>
             </button>
+            <p v-if="loginUserName !== board.authorUsername">-</p>
           </td>
         </tr>
       </tbody>

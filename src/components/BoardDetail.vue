@@ -4,11 +4,14 @@
 import { ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useBoardStore } from "@/store/board";
+import { getUser } from "../../storage";
 
 const route = useRoute();
 const router = useRouter();
 const boardStore = useBoardStore();
 const boardDto = ref(null);
+const loginUser = getUser();
+const loginUserName = loginUser ? loginUser.username : null;
 
 async function fetchBoardDetail(boardId) {
   const response = await boardStore.getBoard(boardId);
@@ -32,16 +35,15 @@ async function deleteBoard(boardId) {
   const confirmed = confirm("정말 삭제하시겠습니까?");
   if (!confirmed) return;
   try {
-    await boardStore.deleteBoard(boardId); 
+    await boardStore.deleteBoard(boardId);
     alert("게시글이 삭제되었습니다.");
-    router.replace("/board"); // 삭제 후 게시글 목록으로 이동 - 히스토리 없이 
+    router.replace("/board"); // 삭제 후 게시글 목록으로 이동 - 히스토리 없이
     //location.reload();
   } catch (error) {
     console.error("삭제 실패:", error);
     alert("삭제에 실패했습니다.");
   }
 }
-
 </script>
 
 
@@ -57,13 +59,21 @@ async function deleteBoard(boardId) {
       <div class="card-body">
         <h3 class="card-title">{{ boardDto.title }}</h3>
         <div class="d-flex justify-content-end mb-2">
-          <button class="btn btn-danger btn-sm" @click="deleteBoard(boardDto.id)">삭제</button>
+          <button
+            v-if="loginUserName === boardDto.authorUsername"
+            class="btn btn-danger btn-sm"
+            @click="deleteBoard(boardDto.id)"
+          >
+            삭제
+          </button>
         </div>
         <h6 class="card-subtitle mb-2 text-muted text-end">
           작성자: {{ boardDto.authorUsername }}
         </h6>
 
-        <p class="card-text mt-3 text-start" style="white-space: pre-line;">{{ boardDto.content }}</p>
+        <p class="card-text mt-3 text-start" style="white-space: pre-line">
+          {{ boardDto.content }}
+        </p>
 
         <div class="mt-4 d-flex justify-content-end gap-2">
           <span class="badge bg-secondary me-2"
