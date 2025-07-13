@@ -40,7 +40,16 @@ const routes = [
           import(
             /* webpackChunkName: "board-detail" */ "../components/BoardDetail.vue"
           ),
-          props: true,
+        props: true,
+      },
+      {
+        path: "update/:id",
+        name: "BoardUpdate",
+        component: () =>
+          import(
+            /* webpackChunkName: "board-update" */ "../components/include/BoardUpdate.vue"
+          ),
+        props: true,
       },
     ],
   },
@@ -49,7 +58,7 @@ const routes = [
     name: "BoardCreate",
     component: () =>
       import(
-            /* webpackChunkName: "board-create" */ "../components/BoardCreate.vue"
+        /* webpackChunkName: "board-create" */ "../components/BoardCreate.vue"
       ),
   },
   {
@@ -62,7 +71,9 @@ const routes = [
     path: "/userDetail",
     name: "UserDetail",
     component: () =>
-      import(/* webpackChunkName: "user-detail" */ "../components/UserDetail.vue"),
+      import(
+        /* webpackChunkName: "user-detail" */ "../components/UserDetail.vue"
+      ),
   },
 ];
 

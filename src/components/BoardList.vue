@@ -4,6 +4,7 @@
 import { onMounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useBoardStore } from "@/store/board";
+import { getUser } from "../../storage";
 
 const boardStore = useBoardStore();
 const boardList = ref([]);
@@ -26,6 +27,8 @@ watch(
     getAllBoard();
   }
 );
+
+const loginUserName = getUser().username;
 </script>
 
 <template>
@@ -45,6 +48,7 @@ watch(
           <th scope="col">게시글 제목</th>
           <th scope="col">작성자</th>
           <th scope="col">게시글 작성/수정일</th>
+          <th scope="col">수정</th>
         </tr>
       </thead>
       <tbody>
@@ -60,6 +64,16 @@ watch(
             {{
               board.changedDate?.slice(0, 10) || board.createdDate?.slice(0, 10)
             }}
+          </td>
+          <td>
+            <button
+              class="btn btn-info btn-sm"
+              v-if="loginUserName === board.authorUsername"
+            >
+              <router-link :to="{ name: 'BoardUpdate', params: { id: board.id }, state:{board} }"
+                >수정
+              </router-link>
+            </button>
           </td>
         </tr>
       </tbody>

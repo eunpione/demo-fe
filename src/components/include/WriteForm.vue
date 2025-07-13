@@ -24,7 +24,7 @@ function saveBoard() {
           class="form-control"
           id="Title"
           placeholder="게시글 제목을 작성해주세요."
-          v-model="boardStore.Title"
+          v-model="boardStore.title"
         />
       </div>
       <div class="mb-3">
@@ -34,7 +34,7 @@ function saveBoard() {
           id="Content"
           placeholder="게시글을 작성해주세요."
           rows="5"
-          v-model="boardStore.Content"
+          v-model="boardStore.content"
         ></textarea>
       </div>
       <button type="submit" class="btn btn-primary">등록하기</button>

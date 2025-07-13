@@ -7,8 +7,9 @@ import { useUserStore } from "@/store/user";
 
 export const useBoardStore = defineStore("board", {
   state: () => ({
-    Title: "",
-    Content: "",
+    id: "",
+    title: "",
+    content: "",
     createdDate: "",
     changedDate: "",
     author: null,
@@ -31,14 +32,14 @@ export const useBoardStore = defineStore("board", {
 
         this.author = user;
         const boardRequestDto = {
-          title: this.Title,
-          content: this.Content,
+          title: this.title,
+          content: this.content,
           userId: this.author.id,
         };
 
         console.log("저장하고자 하는 게시글: ", boardRequestDto);
 
-        const response = await APIURL.post(`api/board`, boardRequestDto, {
+        await APIURL.post(`api/board`, boardRequestDto, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -46,8 +47,8 @@ export const useBoardStore = defineStore("board", {
 
         this.saveSuccess = true;
         this.saveError = null;
-        this.Title = null;
-        this.Content = null;
+        this.title = null;
+        this.content = null;
         router.push("/board"); //게시글 목록으로 이동
       } catch (error) {
         this.saveSuccess = false;
@@ -86,12 +87,11 @@ export const useBoardStore = defineStore("board", {
 
         const response = await APIURL.get(`api/board/${boardId}`);
         const boardDto = response.data;
-        
+
         this.retrieveSuccess = true;
         this.retrieveError = null;
 
         return boardDto;
-
       } catch (error) {
         this.retrieveSuccess = false;
         this.retrieveError =
@@ -101,21 +101,45 @@ export const useBoardStore = defineStore("board", {
       }
     },
 
-    async deleteBoard(boardId){
-
-      try{
-        console.log("게시글 삭제 id: ", boardId)
+    async deleteBoard(boardId) {
+      try {
+        console.log("게시글 삭제 id: ", boardId);
 
         const response = await APIURL.delete(`api/board/${boardId}`);
         const result = response.data;
 
         return result;
-      }catch(error){
+      } catch (error) {
         console.error("게시글 삭제 실패:", error);
       }
-      
+    },
 
+    async updateBoard() {
+      try {
+        const boardDto = {
+          title: this.title,
+          content: this.content,
+          id: this.id,
+        };
 
-    }
+        console.log("수장하고자 하는 게시글: ", boardDto);
+
+        await APIURL.put(`api/board`, boardDto, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        this.saveSuccess = true;
+        this.saveError = null;
+        this.title = null;
+        this.content = null;
+        router.push("/board"); //게시글 목록으로 이동
+      } catch (error) {
+        this.saveSuccess = false;
+        this.saveError = error.message || "게시글 수정 중 오류가 발생했습니다.";
+        console.error("게시글 수정 실패:", error);
+      }
+    },
   },
 });
